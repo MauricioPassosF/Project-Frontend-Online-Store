@@ -42,12 +42,11 @@ class Home extends Component {
           <Loading />
         ) : (
           <div className="category">
-            {categoryList
-            && categoryList.map((products) => (
+            { categoryList.map(({ id, name }) => (
               <Categories
-                key={ products.id }
-                name={ products.name }
-                value={ products.name }
+                key={ id }
+                name={ name }
+                value={ name }
               />
             ))}
           </div>
