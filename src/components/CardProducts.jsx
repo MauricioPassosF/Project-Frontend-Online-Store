@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class CardProducts extends Component {
   render() {
     const { product: { id, title, thumbnail, price } } = this.props;
     return (
-
       <div key={ id } data-testid="product">
-        <h2>{ title }</h2>
+        <Link
+          exact
+          to={ `/product/${id}` }
+          data-testid="product-detail-link"
+        >
+          <h2>{ title }</h2>
+        </Link>
         <img src={ thumbnail } alt={ title } />
         <p>{`R$ ${price}`}</p>
       </div>
-
     );
   }
 }
