@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Categories from '../components/Categories';
 import { getCategories } from '../services/api';
+import Header from '../components/Header';
 
 class Home extends Component {
   state = {
@@ -51,6 +52,7 @@ class Home extends Component {
             ))}
           </div>
         )}
+        <Header />
       </div>
     );
   }
