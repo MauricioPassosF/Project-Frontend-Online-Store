@@ -34,6 +34,7 @@ class Home extends Component {
     const productId = categoryList.filter((category) => category.name === value)[0].id;
     const response = await getSpecificCategory(productId);
     this.setState({
+      productsList: [],
       productCategoryList: response.results,
     });
   };
@@ -50,6 +51,7 @@ class Home extends Component {
     const result = await getProductsFromCategoryAndQuery('', nameInput);
     this.setState({
       nameInput: '',
+      productCategoryList: [],
       productsList: result.results,
       needTheText: true,
     });
