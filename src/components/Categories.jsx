@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Categories extends Component {
   render() {
-    const { name, categoryProducts } = this.props;
+    const { name, clickCategories } = this.props;
     return (
       <aside className="aside">
         <label
@@ -15,7 +15,7 @@ export default class Categories extends Component {
             value={ name }
             id={ `category-${name}` }
             name="category"
-            onClick={ categoryProducts }
+            onClick={ clickCategories }
           />
           { name }
         </label>
@@ -25,6 +25,6 @@ export default class Categories extends Component {
 }
 
 Categories.propTypes = ({
-  categoryProducts: PropTypes.func,
   name: PropTypes.string,
+  clickCategories: PropTypes.func,
 }).isRequired;
