@@ -3,15 +3,26 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { getProductById } from '../services/api';
 import addProduct from '../services/addProduct';
+import FormsAvaliation from '../components/FormsAvaliation';
 
 export default class ProductDetails extends Component {
   state = {
     productData: {},
+    idProduct: '',
   };
 
   componentDidMount() {
     this.fetchProduct();
+    this.saveIdProduct();
   }
+
+  saveIdProduct = () => {
+    const { match: { params: { id } } } = this.props;
+    localStorage.setItem('idDoProduto', JSON.stringify(id));
+    this.setState({
+      idProduct: id,
+    });
+  };
 
   fetchProduct = async () => {
     const { match: { params: { id } } } = this.props;
@@ -20,7 +31,9 @@ export default class ProductDetails extends Component {
   };
 
   render() {
-    const { productData: { title, price, thumbnail }, productData } = this.state;
+    const {
+      productData: { title, price, thumbnail }, productData, idProduct,
+    } = this.state;
 
     return (
       <main>
@@ -60,6 +73,7 @@ export default class ProductDetails extends Component {
               🛒
             </button>
           </Link>
+          <FormsAvaliation idProduct={ idProduct } />
         </div>
       </main>
     );

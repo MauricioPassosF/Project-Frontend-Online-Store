@@ -11,7 +11,13 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Home } />
         <Route exact path="/CartShop" component={ CartShop } />
-        <Route exact path="/product/:id" component={ ProductDetails } />
+        <Route
+          exact
+          path="/product/:id"
+          render={ (props) => (
+            <ProductDetails { ...props } />
+          ) }
+        />
       </Switch>
     </div>
   );

@@ -1,5 +1,4 @@
 const addProduct = (product) => {
-  console.log('entrou');
   const filteredProduct = {
     ...product,
     quantity: 1,
