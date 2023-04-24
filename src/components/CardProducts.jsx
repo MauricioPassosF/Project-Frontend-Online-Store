@@ -34,7 +34,8 @@ class CardProducts extends Component {
 
   render() {
     const {
-      product: { id, title, thumbnail, price }, addProduct, type, removeProduct } = this.props;
+      product: { id, title, thumbnail, price }, addProduct, type, removeProduct,
+    } = this.props;
     const { quantityState } = this.state;
     return (
       <div key={ id } data-testid="product">
