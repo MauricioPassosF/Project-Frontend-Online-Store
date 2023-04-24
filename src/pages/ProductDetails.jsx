@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { getProductById } from '../services/api';
 import addProduct from '../services/addProduct';
+import FormsAvaliation from '../components/FormsAvaliation';
 
 export default class ProductDetails extends Component {
   state = {
@@ -20,7 +21,9 @@ export default class ProductDetails extends Component {
   };
 
   render() {
-    const { productData: { title, price, thumbnail }, productData } = this.state;
+    const {
+      productData: { title, price, thumbnail }, productData } = this.state;
+    const { match: { params: { id } } } = this.props;
 
     return (
       <main>
@@ -60,6 +63,7 @@ export default class ProductDetails extends Component {
               🛒
             </button>
           </Link>
+          <FormsAvaliation id={ id } />
         </div>
       </main>
     );
