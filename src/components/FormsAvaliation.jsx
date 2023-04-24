@@ -8,7 +8,7 @@ class FormsAvaliation extends Component {
     email: '',
     textarea: '',
     nota: 0,
-    displayErrorMessage: false,
+    showErrorMessage: false,
     haveComments: false,
   };
 
@@ -54,7 +54,6 @@ class FormsAvaliation extends Component {
       email: '',
       textarea: '',
       nota: 0,
-      /* isChecked: false, */
       haveComments: true,
     });
   };
@@ -65,7 +64,7 @@ class FormsAvaliation extends Component {
     this.clearState();
     const { email, textarea, nota } = this.state;
     this.setState({
-      displayErrorMessage: (
+      showErrorMessage: (
         email !== 'teste@trybe.com' && textarea.length === 0 && Number(nota) === 0
       ),
     });
@@ -75,8 +74,7 @@ class FormsAvaliation extends Component {
     const {
       email,
       textarea,
-      displayErrorMessage,
-      /* isChecked, */
+      showErrorMessage,
       haveComments,
     } = this.state;
     const { id } = this.props;
@@ -91,57 +89,58 @@ class FormsAvaliation extends Component {
             data-testid="product-detail-email"
             onChange={ this.handleChage }
           />
-          <label htmlFor="evaluation">
-            1
-            <input
-              type="radio"
-              name="nota"
-              value="1"
-              id="evaluation"
-              /* checked={ isChecked } */
-              data-testid="1-rating"
-              onClick={ this.handleChage }
-            />
-            2
-            <input
-              type="radio"
-              name="nota"
-              value="2"
-              id="evaluation"
-              /* checked={ isChecked } */
-              data-testid="2-rating"
-              onClick={ this.handleChage }
-            />
-            3
-            <input
-              type="radio"
-              name="nota"
-              value="3"
-              id="evaluation"
-              /* checked={ isChecked } */
-              data-testid="3-rating"
-              onClick={ this.handleChage }
-            />
-            4
-            <input
-              type="radio"
-              name="nota"
-              value="4"
-              id="evaluation"
-              /* checked={ isChecked } */
-              data-testid="4-rating"
-              onClick={ this.handleChage }
-            />
-            5
-            <input
-              type="radio"
-              name="nota"
-              value="5"
-              id="evaluation"
-              /* checked={ isChecked } */
-              data-testid="5-rating"
-              onClick={ this.handleChage }
-            />
+          <label>
+            Nota:
+            <label>
+              <input
+                type="radio"
+                name="nota"
+                value="1"
+                data-testid="1-rating"
+                onClick={ this.handleChage }
+              />
+              1
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="nota"
+                value="2"
+                data-testid="2-rating"
+                onClick={ this.handleChage }
+              />
+              2
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="nota"
+                value="3"
+                data-testid="3-rating"
+                onClick={ this.handleChage }
+              />
+              3
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="nota"
+                value="4"
+                data-testid="4-rating"
+                onClick={ this.handleChage }
+              />
+              4
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="nota"
+                value="5"
+                data-testid="5-rating"
+                onClick={ this.handleChage }
+              />
+              5
+            </label>
           </label>
           <textarea
             name="textarea"
@@ -167,7 +166,7 @@ class FormsAvaliation extends Component {
           ) : ''
         }
         {
-          displayErrorMessage ? <ErrorMessage /> : ''
+          showErrorMessage ? <ErrorMessage /> : ''
         }
       </div>
     );

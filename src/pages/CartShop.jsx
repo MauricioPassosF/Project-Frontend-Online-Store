@@ -12,6 +12,13 @@ export default class CartShop extends Component {
     this.takeProductLocalStorage();
   }
 
+  componentDidUpdate(_prevProps, prevState) {
+    const { cart } = this.state;
+    if (prevState.cart !== cart) {
+      this.test(cart);
+    }
+  }
+
   takeProductLocalStorage = () => {
     const productsList = JSON.parse(localStorage.getItem('productsList'));
     this.setState({
@@ -27,16 +34,28 @@ export default class CartShop extends Component {
   };
 
   removeProduct = (id) => {
-    console.log(id);
-    const arrayProducts = JSON.parse(localStorage.getItem('productsList'));
-    console.log(arrayProducts);
-    const indexProduct = arrayProducts.findIndex((product) => product.id === id);
-    arrayProducts.splice(indexProduct, 1);
-    localStorage.setItem('productsList', JSON.stringify(arrayProducts));
+    const arrayProducts = JSON.parse(localStorage.getItem('productsList')) || [];
+    /* const indexProduct = arrayProducts.findIndex((product) => product.id === id); */
+    const newArray = arrayProducts.filter((product) => product.id !== id);
+    /* arrayProducts.splice(indexProduct, 1); */
+    localStorage.setItem('productsList', JSON.stringify(newArray));
+    if (newArray.length === 0) {
+      this.setState({
+        haveThings: false,
+      });
+    }
     this.setState({
-      cart: arrayProducts,
+      cart: newArray,
     });
   };
+
+  test(cart) {
+    if (cart === null) {
+      this.setState({
+        haveThings: false,
+      });
+    }
+  }
 
   render() {
     const { cart, haveThings } = this.state;
@@ -45,15 +64,21 @@ export default class CartShop extends Component {
         <Link to="/">Voltar</Link>
         {
           haveThings ? (
-            cart.map((product) => (
-              <CardProducts
-                product={ product }
-                key={ product.id }
-                quantity={ product.quantity }
-                removeProduct={ this.removeProduct }
-                type="cart"
-              />
-            ))
+            <div>
+              {
+                cart.map((product) => (
+                  <CardProducts
+                    product={ product }
+                    key={ product.id }
+                    removeProduct={ this.removeProduct }
+                    type="cart"
+                  />
+                ))
+              }
+              <Link exact to="/Checkout" data-testid="checkout-products">
+                <button type="submit">Finalizar a Compra</button>
+              </Link>
+            </div>
           ) : (
             <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>
           )

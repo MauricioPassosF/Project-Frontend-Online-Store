@@ -119,6 +119,7 @@ class Home extends Component {
               product={ product }
               key={ product.id }
               addProduct={ () => addProduct(product) }
+              type="product"
             />
           ))}
         {
@@ -127,6 +128,7 @@ class Home extends Component {
               product={ product }
               key={ product.id }
               addProduct={ () => addProduct(product) }
+              type="product"
             />
           ))
         }

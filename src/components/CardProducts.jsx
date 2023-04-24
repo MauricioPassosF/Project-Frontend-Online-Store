@@ -7,13 +7,19 @@ class CardProducts extends Component {
     quantityState: 1,
   };
 
-  atualizaQuantidade = () => {
+  componentDidMount() {
+    this.updateQuantity();
+  }
+
+  updateQuantity = () => {
     const { product: { id } } = this.props;
     const quantityProduct = JSON.parse(localStorage.getItem('productsList'));
-    const product = quantityProduct.filter((item) => item.id === id)[0];
-    this.setState({
-      quantityState: product.quantity,
-    });
+    if (quantityProduct && quantityProduct.length > 0) {
+      const product = quantityProduct.filter((item) => item.id === id)[0];
+      this.setState({
+        quantityState: product.quantity,
+      });
+    }
   };
 
   addAndSubtractQuantity = (type) => {
@@ -25,11 +31,10 @@ class CardProducts extends Component {
     } else {
       produto.quantity -= 1;
     }
-    /* console.log(produto.quantity); */
     const indexProduct = arrayProducts.findIndex((product) => product.id === id);
     arrayProducts.splice(indexProduct, 1, produto);
     localStorage.setItem('productsList', JSON.stringify(arrayProducts));
-    this.atualizaQuantidade();
+    this.updateQuantity();
   };
 
   render() {
@@ -50,7 +55,6 @@ class CardProducts extends Component {
             }
           >
             { title }
-
           </h2>
         </Link>
         <img src={ thumbnail } alt={ title } />
@@ -87,13 +91,17 @@ class CardProducts extends Component {
           ) : ''
         }
         <p>{`R$ ${price}`}</p>
-        <button
-          type="submit"
-          data-testid="product-add-to-cart"
-          onClick={ addProduct }
-        >
-          Adicionar ao carrinho
-        </button>
+        {
+          type === 'product' ? (
+            <button
+              type="submit"
+              data-testid="product-add-to-cart"
+              onClick={ addProduct }
+            >
+              Adicionar ao carrinho
+            </button>
+          ) : ''
+        }
       </div>
     );
   }

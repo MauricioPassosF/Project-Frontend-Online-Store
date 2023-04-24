@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import CartShop from './pages/CartShop';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -16,6 +17,13 @@ function App() {
           path="/product/:id"
           render={ (props) => (
             <ProductDetails { ...props } />
+          ) }
+        />
+        <Route
+          exact
+          path="/Checkout"
+          render={ (props) => (
+            <Checkout { ...props } />
           ) }
         />
       </Switch>
