@@ -17,13 +17,11 @@ class FormsAvaliation extends Component {
   }
 
   showAssessments = () => {
-    const id = JSON.parse(localStorage.getItem('idDoProduto'));
-    console.log(id);
+    const { id } = this.props;
     if (localStorage.getItem(id)) {
       this.setState({
         haveComments: true,
       });
-      console.log('oi');
     }
   };
 
@@ -35,20 +33,19 @@ class FormsAvaliation extends Component {
 
   saveLocalStorage = () => {
     const { email, textarea, nota } = this.state;
-    const { idProduct } = this.props;
-    console.log(idProduct);
+    const { id } = this.props;
     const avaliation = {
       email,
       text: textarea,
       rating: nota,
     };
-    if (localStorage.getItem(idProduct)) {
-      const assessmentsLocalStorage = JSON.parse(localStorage.getItem(idProduct));
-      localStorage.setItem(idProduct, JSON.stringify(
+    if (localStorage.getItem(id)) {
+      const assessmentsLocalStorage = JSON.parse(localStorage.getItem(id));
+      localStorage.setItem(id, JSON.stringify(
         [...assessmentsLocalStorage, avaliation],
       ));
     } else {
-      localStorage.setItem(idProduct, JSON.stringify([avaliation]));
+      localStorage.setItem(id, JSON.stringify([avaliation]));
     }
   };
 
@@ -75,7 +72,6 @@ class FormsAvaliation extends Component {
   };
 
   render() {
-    const { idProduct } = this.props;
     const {
       email,
       textarea,
@@ -83,7 +79,8 @@ class FormsAvaliation extends Component {
       /* isChecked, */
       haveComments,
     } = this.state;
-    const arrayAssessments = JSON.parse(localStorage.getItem(idProduct));
+    const { id } = this.props;
+    const arrayAssessments = JSON.parse(localStorage.getItem(id));
     return (
       <div>
         <form>
@@ -162,7 +159,6 @@ class FormsAvaliation extends Component {
             Enviar
           </button>
         </form>
-        <p>{idProduct}</p>
         {
           haveComments ? (
             arrayAssessments.map((assessment, index) => (
@@ -179,7 +175,7 @@ class FormsAvaliation extends Component {
 }
 
 FormsAvaliation.propTypes = {
-  idProduct: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default FormsAvaliation;

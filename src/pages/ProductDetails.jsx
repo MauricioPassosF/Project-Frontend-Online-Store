@@ -8,21 +8,11 @@ import FormsAvaliation from '../components/FormsAvaliation';
 export default class ProductDetails extends Component {
   state = {
     productData: {},
-    idProduct: '',
   };
 
   componentDidMount() {
     this.fetchProduct();
-    this.saveIdProduct();
   }
-
-  saveIdProduct = () => {
-    const { match: { params: { id } } } = this.props;
-    localStorage.setItem('idDoProduto', JSON.stringify(id));
-    this.setState({
-      idProduct: id,
-    });
-  };
 
   fetchProduct = async () => {
     const { match: { params: { id } } } = this.props;
@@ -32,8 +22,8 @@ export default class ProductDetails extends Component {
 
   render() {
     const {
-      productData: { title, price, thumbnail }, productData, idProduct,
-    } = this.state;
+      productData: { title, price, thumbnail }, productData } = this.state;
+    const { match: { params: { id } } } = this.props;
 
     return (
       <main>
@@ -73,7 +63,7 @@ export default class ProductDetails extends Component {
               🛒
             </button>
           </Link>
-          <FormsAvaliation idProduct={ idProduct } />
+          <FormsAvaliation id={ id } />
         </div>
       </main>
     );
