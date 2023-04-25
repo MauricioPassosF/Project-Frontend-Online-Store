@@ -4,15 +4,25 @@ import { PropTypes } from 'prop-types';
 import { getProductById } from '../services/api';
 import addProduct from '../services/addProduct';
 import FormsAvaliation from '../components/FormsAvaliation';
+import ProductQuantity from '../components/ProductQuantity';
 
 export default class ProductDetails extends Component {
   state = {
     productData: {},
+    totalAmount: 0,
   };
 
   componentDidMount() {
     this.fetchProduct();
+    this.test();
   }
+
+  test = () => {
+    const quantity = JSON.parse(localStorage.getItem('totalAmount')) || [];
+    this.setState({
+      totalAmount: quantity,
+    });
+  };
 
   fetchProduct = async () => {
     const { match: { params: { id } } } = this.props;
@@ -22,7 +32,7 @@ export default class ProductDetails extends Component {
 
   render() {
     const {
-      productData: { title, price, thumbnail }, productData } = this.state;
+      productData: { title, price, thumbnail }, productData, totalAmount } = this.state;
     const { match: { params: { id } } } = this.props;
 
     return (
@@ -47,7 +57,10 @@ export default class ProductDetails extends Component {
           <button
             type="button"
             name="btn-ShopCart"
-            onClick={ () => addProduct(productData) }
+            onClick={ () => {
+              addProduct(productData);
+              this.test();
+            } }
             data-testid="product-detail-add-to-cart"
           >
             Comprar
@@ -63,6 +76,7 @@ export default class ProductDetails extends Component {
               🛒
             </button>
           </Link>
+          <ProductQuantity totalAmount={ totalAmount } />
           <FormsAvaliation id={ id } />
         </div>
       </main>

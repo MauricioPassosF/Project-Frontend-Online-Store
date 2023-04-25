@@ -9,6 +9,7 @@ import {
 } from '../services/api';
 import CardProducts from '../components/CardProducts';
 import addProduct from '../services/addProduct';
+import ProductQuantity from '../components/ProductQuantity';
 
 class Home extends Component {
   state = {
@@ -18,11 +19,20 @@ class Home extends Component {
     categoryList: [],
     productCategoryList: [],
     loading: false,
+    totalAmount: 0,
   };
 
   componentDidMount() {
     this.fetchCategoryList();
+    this.test();
   }
+
+  test = () => {
+    const quantity = JSON.parse(localStorage.getItem('totalAmount')) || [];
+    this.setState({
+      totalAmount: quantity,
+    });
+  };
 
   fetchCategoryList = async () => {
     this.setState({ loading: true });
@@ -66,6 +76,7 @@ class Home extends Component {
       categoryList,
       loading,
       productCategoryList,
+      totalAmount,
     } = this.state;
     return (
       <div>
@@ -80,6 +91,7 @@ class Home extends Component {
             🛒
           </button>
         </Link>
+        <ProductQuantity totalAmount={ totalAmount } />
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
@@ -120,6 +132,7 @@ class Home extends Component {
               key={ product.id }
               addProduct={ () => addProduct(product) }
               type="product"
+              test={ this.test }
             />
           ))}
         {
@@ -129,6 +142,7 @@ class Home extends Component {
               key={ product.id }
               addProduct={ () => addProduct(product) }
               type="product"
+              test={ this.test }
             />
           ))
         }

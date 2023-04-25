@@ -12,12 +12,13 @@ class CardProducts extends Component {
   }
 
   updateQuantity = () => {
-    const { product: { id } } = this.props;
-    const quantityProduct = JSON.parse(localStorage.getItem('productsList'));
+    const quantityProduct = JSON.parse(localStorage.getItem('productsList')) || [];
     if (quantityProduct && quantityProduct.length > 0) {
-      const product = quantityProduct.filter((item) => item.id === id)[0];
+      const { quantityState } = this.state;
+      const { product: { id } } = this.props;
+      const product = quantityProduct.find((item) => (item.id === id));
       this.setState({
-        quantityState: product.quantity,
+        quantityState: product ? product.quantity : quantityState,
       });
     }
   };
@@ -39,7 +40,7 @@ class CardProducts extends Component {
 
   render() {
     const {
-      product: { id, title, thumbnail, price }, addProduct, type, removeProduct,
+      product: { id, title, thumbnail, price }, addProduct, type, removeProduct, test,
     } = this.props;
     const { quantityState } = this.state;
     return (
@@ -91,17 +92,16 @@ class CardProducts extends Component {
           ) : ''
         }
         <p>{`R$ ${price}`}</p>
-        {
-          type === 'product' ? (
-            <button
-              type="submit"
-              data-testid="product-add-to-cart"
-              onClick={ addProduct }
-            >
-              Adicionar ao carrinho
-            </button>
-          ) : ''
-        }
+        <button
+          type="submit"
+          data-testid="product-add-to-cart"
+          onClick={ () => {
+            addProduct();
+            test();
+          } }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }

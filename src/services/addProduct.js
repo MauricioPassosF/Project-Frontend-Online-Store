@@ -1,3 +1,10 @@
+const verifyQuantity = () => {
+  const productsLocalStorage = JSON.parse(localStorage.getItem('productsList')) || [];
+  const totalAmount = productsLocalStorage
+    .reduce((total, { quantity }) => total + quantity, 0);
+  localStorage.setItem('totalAmount', JSON.stringify(totalAmount));
+};
+
 const addProduct = (product) => {
   const filteredProduct = {
     ...product,
@@ -16,6 +23,7 @@ const addProduct = (product) => {
         return item;
       });
       localStorage.setItem('productsList', JSON.stringify(arrayForChangeQuantity));
+      verifyQuantity();
     } else {
       // Quando é adicionado pela primeira vez na lista
       const takelocal = JSON.parse(localStorage.getItem('productsList'));
@@ -25,6 +33,7 @@ const addProduct = (product) => {
   } else {
     // Quando o localStorage ainda não existe
     localStorage.setItem('productsList', JSON.stringify([filteredProduct]));
+    verifyQuantity();
   }
 };
 
