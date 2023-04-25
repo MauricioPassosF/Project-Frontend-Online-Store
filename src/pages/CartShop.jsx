@@ -76,7 +76,7 @@ export default class CartShop extends Component {
                   />
                 ))
               }
-              <Link exact to="/Checkout" data-testid="checkout-products">
+              <Link to="/Checkout" data-testid="checkout-products">
                 <button type="submit">Finalizar a Compra</button>
               </Link>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ProductQuantity extends Component {
   render() {
@@ -10,5 +11,9 @@ class ProductQuantity extends Component {
     );
   }
 }
+
+ProductQuantity.propTypes = {
+  totalAmount: PropTypes.number.isRequired,
+};
 
 export default ProductQuantity;

@@ -41,7 +41,7 @@ class CardProducts extends Component {
 
   render() {
     const {
-      product: { id, title, thumbnail, price }, addProduct, type, removeProduct,
+      product: { id, title, thumbnail, price, shipping }, addProduct, type, removeProduct,
     } = this.props;
     const { quantityState } = this.state;
     return (
@@ -53,7 +53,6 @@ class CardProducts extends Component {
         />
         <Link
           className="link-h2"
-          exact
           to={ `/product/${id}` }
           data-testid="product-detail-link"
         >
@@ -98,6 +97,9 @@ class CardProducts extends Component {
             </div>
           ) : ''
         }
+        {shipping.free_shipping
+          ? <p data-testid="free-shipping">🚚 Frete grátis</p>
+          : ''}
         <p>{`R$ ${price}`}</p>
 
         <button

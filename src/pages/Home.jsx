@@ -26,15 +26,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategoryList();
-    /* this.test(); */
   }
-
-  /*   test = () => {
-    const quantity = JSON.parse(localStorage.getItem('totalAmount')) || [];
-    this.setState({
-      totalAmount: this.verifyQuantity(),
-    });
-  }; */
 
   fetchCategoryList = async () => {
     this.setState({ loading: true });
@@ -131,39 +123,27 @@ class Home extends Component {
               <h2>Nenhum produto foi encontrado</h2>
             )
               : productsList.map((product) => (
-                <>
-                  {product.shipping.free_shipping
-                    ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
-                    : ''}
-                  <CardProducts
-                    product={ product }
-                    key={ product.id }
-                    addProduct={ () => {
-                      addProduct(product);
-                      this.updateQuantityState();
-                    } }
-                    type="product"
-                    test={ this.test }
-                  />
-                </>
+                <CardProducts
+                  product={ product }
+                  key={ product.id }
+                  addProduct={ () => {
+                    addProduct(product);
+                    this.updateQuantityState();
+                  } }
+                  type="product"
+                />
               ))}
             {
               productCategoryList.map((product) => (
-                <>
-                  {product.shipping.free_shipping
-                    ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
-                    : ''}
-                  <CardProducts
-                    product={ product }
-                    key={ product.id }
-                    addProduct={ () => {
-                      addProduct(product);
-                      this.updateQuantityState();
-                    } }
-                    type="product"
-                    test={ this.test }
-                  />
-                </>
+                <CardProducts
+                  product={ product }
+                  key={ product.id }
+                  addProduct={ () => {
+                    addProduct(product);
+                    this.updateQuantityState();
+                  } }
+                  type="product"
+                />
               ))
             }
           </div>
