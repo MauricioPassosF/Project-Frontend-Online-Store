@@ -10,6 +10,7 @@ import {
 import CardProducts from '../components/CardProducts';
 import addProduct from '../services/addProduct';
 import ProductQuantity from '../components/ProductQuantity';
+import Header from '../components/Header';
 
 class Home extends Component {
   state = {
@@ -80,6 +81,11 @@ class Home extends Component {
     } = this.state;
     return (
       <div>
+        <Header
+          handleChange={ this.handleChange }
+          nameInput={ nameInput }
+          fetchApi={ this.fetchApi }
+        />
         <Link
           to="/CartShop"
           data-testid="shopping-cart-button"
@@ -109,41 +115,37 @@ class Home extends Component {
             ))}
           </div>
         )}
-        <input
-          type="text"
-          name="nameInput"
-          value={ nameInput }
-          data-testid="query-input"
-          onChange={ this.handleChange }
-        />
-        <button
-          type="submit"
-          data-testid="query-button"
-          onClick={ this.fetchApi }
-        >
-          🔎
-        </button>
         { needTheText && productsList.length === 0 ? (
           <h2>Nenhum produto foi encontrado</h2>
         )
           : productsList.map((product) => (
-            <CardProducts
-              product={ product }
-              key={ product.id }
-              addProduct={ () => addProduct(product) }
-              type="product"
-              test={ this.test }
-            />
+            <>
+              {product.shipping.free_shipping
+                ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
+                : ''}
+              <CardProducts
+                product={ product }
+                key={ product.id }
+                addProduct={ () => addProduct(product) }
+                type="product"
+                test={ this.test }
+              />
+            </>
           ))}
         {
           productCategoryList.map((product) => (
-            <CardProducts
-              product={ product }
-              key={ product.id }
-              addProduct={ () => addProduct(product) }
-              type="product"
-              test={ this.test }
-            />
+            <>
+              {product.shipping.free_shipping
+                ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
+                : ''}
+              <CardProducts
+                product={ product }
+                key={ product.id }
+                addProduct={ () => addProduct(product) }
+                type="product"
+                test={ this.test }
+              />
+            </>
           ))
         }
       </div>

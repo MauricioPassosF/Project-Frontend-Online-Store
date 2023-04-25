@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CardProducts from '../components/CardProducts';
+import '../Css/CartShop.css';
 
 export default class CartShop extends Component {
   state = {
@@ -60,7 +61,7 @@ export default class CartShop extends Component {
   render() {
     const { cart, haveThings } = this.state;
     return (
-      <div>
+      <div className="div-content">
         <Link to="/">Voltar</Link>
         {
           haveThings ? (

@@ -24,15 +24,15 @@ class CardProducts extends Component {
   };
 
   addAndSubtractQuantity = (type) => {
-    const { product: { id } } = this.props;
+    const { product } = this.props;
     const arrayProducts = JSON.parse(localStorage.getItem('productsList'));
-    const produto = arrayProducts.filter((product) => product.id === id)[0];
-    if (type === 'add') {
+    const produto = arrayProducts.filter((prod) => prod.id === product.id)[0];
+    if (type === 'add' && produto.quantity < product.available_quantity) {
       produto.quantity += 1;
-    } else {
+    } else if (type !== 'add') {
       produto.quantity -= 1;
     }
-    const indexProduct = arrayProducts.findIndex((product) => product.id === id);
+    const indexProduct = arrayProducts.findIndex((prod) => prod.id === product.id);
     arrayProducts.splice(indexProduct, 1, produto);
     localStorage.setItem('productsList', JSON.stringify(arrayProducts));
     this.updateQuantity();
