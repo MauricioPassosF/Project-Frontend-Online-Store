@@ -63,7 +63,7 @@ class Home extends Component {
   };
 
   updateQuantityState = () => {
-    const productsLocalStorage = JSON.parse(localStorage.getItem('productsList')) || [];
+    const productsLocalStorage = JSON.parse(localStorage.getItem('productsList')) || 0;
     const totalAmount = productsLocalStorage
       .reduce((total, { quantity }) => total + quantity, 0);
     this.setState({

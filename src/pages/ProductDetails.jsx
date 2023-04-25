@@ -14,11 +14,11 @@ export default class ProductDetails extends Component {
 
   componentDidMount() {
     this.fetchProduct();
-    this.test();
+    this.updateQuantityState();
   }
 
-  test = () => {
-    const quantity = JSON.parse(localStorage.getItem('totalAmount')) || [];
+  updateQuantityState = () => {
+    const quantity = JSON.parse(localStorage.getItem('totalAmount')) || 0;
     this.setState({
       totalAmount: quantity,
     });
@@ -59,7 +59,7 @@ export default class ProductDetails extends Component {
             name="btn-ShopCart"
             onClick={ () => {
               addProduct(productData);
-              this.test();
+              this.updateQuantityState();
             } }
             data-testid="product-detail-add-to-cart"
           >
