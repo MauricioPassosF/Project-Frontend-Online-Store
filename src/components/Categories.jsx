@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../Css/Categories.css';
 
 export default class Categories extends Component {
   render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../Css/CardProducts.css';
 
 class CardProducts extends Component {
   state = {
@@ -40,17 +41,24 @@ class CardProducts extends Component {
 
   render() {
     const {
-      product: { id, title, thumbnail, price }, addProduct, type, removeProduct, test,
+      product: { id, title, thumbnail, price }, addProduct, type, removeProduct,
     } = this.props;
     const { quantityState } = this.state;
     return (
-      <div key={ id } data-testid="product">
+      <div key={ id } data-testid="product" className="card-product">
+        <img
+          src={ thumbnail }
+          alt={ title }
+          className="img-card-product"
+        />
         <Link
+          className="link-h2"
           exact
           to={ `/product/${id}` }
           data-testid="product-detail-link"
         >
           <h2
+            className="title"
             data-testid={
               type === 'cart' ? ('shopping-cart-product-name') : ''
             }
@@ -58,7 +66,6 @@ class CardProducts extends Component {
             { title }
           </h2>
         </Link>
-        <img src={ thumbnail } alt={ title } />
         {
           type === 'cart' ? (
             <div>
@@ -92,15 +99,21 @@ class CardProducts extends Component {
           ) : ''
         }
         <p>{`R$ ${price}`}</p>
+
         <button
+          /* type="button" */
+          className="button"
           type="submit"
           data-testid="product-add-to-cart"
-          onClick={ () => {
-            addProduct();
-            test();
-          } }
+          onClick={ () => addProduct() }
         >
-          Adicionar ao carrinho
+          <span className="button__text">Adicionar ao carrinho</span>
+          <span className="button__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" stroke="currentColor" height="24" fill="none" className="svg">
+              <line y2="19" y1="5" x2="12" x1="12" />
+              <line y2="12" y1="12" x2="19" x1="5" />
+            </svg>
+          </span>
         </button>
       </div>
     );

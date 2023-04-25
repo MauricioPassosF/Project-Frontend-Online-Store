@@ -1,0 +1,90 @@
+.card-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 279.6px;
+  height: 358.7px;
+  border-radius: 20px;
+  background: linear-gradient(315deg, #8B7F7F, #A59797);
+  box-shadow: -27px -27px 54px #786E6E,
+    27px 27px 54px #BCACAC;
+}
+
+.img-card-product {
+  max-width: 150px;
+  max-height: 150px;
+  width: 150px;
+  height: 100%;
+}
+
+.link-h2 {
+  font-style: none;
+}
+
+.title {
+  font-style: none;
+  font-size: 20px;
+}
+
+
+.button {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+.button,
+.button__icon,
+.button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(155px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.button:hover {
+  background: #34974d;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #2e8644;
+}
+
+.button:active {
+  border: 1px solid #2e8644;
+}

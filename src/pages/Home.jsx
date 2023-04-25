@@ -11,6 +11,7 @@ import CardProducts from '../components/CardProducts';
 import addProduct from '../services/addProduct';
 import ProductQuantity from '../components/ProductQuantity';
 import Header from '../components/Header';
+import '../Css/Home.css';
 
 class Home extends Component {
   state = {
@@ -25,15 +26,15 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategoryList();
-    this.test();
+    /* this.test(); */
   }
 
-  test = () => {
+  /*   test = () => {
     const quantity = JSON.parse(localStorage.getItem('totalAmount')) || [];
     this.setState({
-      totalAmount: quantity,
+      totalAmount: this.verifyQuantity(),
     });
-  };
+  }; */
 
   fetchCategoryList = async () => {
     this.setState({ loading: true });
@@ -69,6 +70,15 @@ class Home extends Component {
     });
   };
 
+  updateQuantityState = () => {
+    const productsLocalStorage = JSON.parse(localStorage.getItem('productsList')) || [];
+    const totalAmount = productsLocalStorage
+      .reduce((total, { quantity }) => total + quantity, 0);
+    this.setState({
+      totalAmount,
+    });
+  };
+
   render() {
     const {
       nameInput,
@@ -101,53 +111,63 @@ class Home extends Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className="category">
-            { categoryList.map(({ id, name }) => (
-              <Categories
-                key={ id }
-                name={ name }
-                value={ name }
-                clickCategories={ this.clickCategories }
-              />
-            ))}
+        <div className="div-content-home">
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="category">
+              { categoryList.map(({ id, name }) => (
+                <Categories
+                  key={ id }
+                  name={ name }
+                  value={ name }
+                  clickCategories={ this.clickCategories }
+                />
+              ))}
+            </div>
+          )}
+          <div className="div-content-products-home">
+            { needTheText && productsList.length === 0 ? (
+              <h2>Nenhum produto foi encontrado</h2>
+            )
+              : productsList.map((product) => (
+                <>
+                  {product.shipping.free_shipping
+                    ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
+                    : ''}
+                  <CardProducts
+                    product={ product }
+                    key={ product.id }
+                    addProduct={ () => {
+                      addProduct(product);
+                      this.updateQuantityState();
+                    } }
+                    type="product"
+                    test={ this.test }
+                  />
+                </>
+              ))}
+            {
+              productCategoryList.map((product) => (
+                <>
+                  {product.shipping.free_shipping
+                    ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
+                    : ''}
+                  <CardProducts
+                    product={ product }
+                    key={ product.id }
+                    addProduct={ () => {
+                      addProduct(product);
+                      this.updateQuantityState();
+                    } }
+                    type="product"
+                    test={ this.test }
+                  />
+                </>
+              ))
+            }
           </div>
-        )}
-        { needTheText && productsList.length === 0 ? (
-          <h2>Nenhum produto foi encontrado</h2>
-        )
-          : productsList.map((product) => (
-            <>
-              {product.shipping.free_shipping
-                ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
-                : ''}
-              <CardProducts
-                product={ product }
-                key={ product.id }
-                addProduct={ () => addProduct(product) }
-                type="product"
-                test={ this.test }
-              />
-            </>
-          ))}
-        {
-          productCategoryList.map((product) => (
-            <>
-              {product.shipping.free_shipping
-                ? <p data-testid="free-shipping">:caminhão: Frete grátis</p>
-                : ''}
-              <CardProducts
-                product={ product }
-                key={ product.id }
-                addProduct={ () => addProduct(product) }
-                type="product"
-                test={ this.test }
-              />
-            </>
-          ))
-        }
+        </div>
       </div>
     );
   }
