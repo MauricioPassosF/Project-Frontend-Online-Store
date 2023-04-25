@@ -1,15 +1,14 @@
-.card-product {
+/* .card-product {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   border: 1px solid black;
   width: 279.6px;
   height: 358.7px;
   border-radius: 20px;
-  background: linear-gradient(315deg, #8B7F7F, #A59797);
-  box-shadow: -27px -27px 54px #786E6E,
-    27px 27px 54px #BCACAC;
+  background: linear-gradient(315deg, #8b7f7f, #a59797);
+  box-shadow: -27px -27px 54px #786e6e, 27px 27px 54px #bcacac;
 }
 
 .img-card-product {
@@ -27,7 +26,6 @@
   font-style: none;
   font-size: 20px;
 }
-
 
 .button {
   position: relative;
@@ -87,4 +85,4 @@
 
 .button:active {
   border: 1px solid #2e8644;
-}
+} */
