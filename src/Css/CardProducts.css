@@ -1,4 +1,4 @@
-/* .card-product {
+.card-product {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,4 +85,4 @@
 
 .button:active {
   border: 1px solid #2e8644;
-} */
+}
