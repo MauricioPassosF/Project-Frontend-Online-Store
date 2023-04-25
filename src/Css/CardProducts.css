@@ -1,21 +1,21 @@
 .card-product {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px solid black;
-  width: 279.6px;
-  height: 358.7px;
-  border-radius: 20px;
   background: linear-gradient(315deg, #8b7f7f, #a59797);
-  box-shadow: -27px -27px 54px #786e6e, 27px 27px 54px #bcacac;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: -27px -27px 54px #786e6e 27px 27px 54px #bcacac;
+  display: flex;
+  flex-direction: column;
+  height: 358.7px;
+  justify-content: center;
+  width: 279.6px;
 }
 
 .img-card-product {
-  max-width: 150px;
-  max-height: 150px;
-  width: 150px;
   height: 100%;
+  max-height: 150px;
+  max-width: 150px;
+  width: 150px;
 }
 
 .link-h2 {
@@ -23,47 +23,45 @@
 }
 
 .title {
-  font-style: none;
   font-size: 20px;
+  font-style: none;
 }
 
 .button {
-  position: relative;
-  width: 200px;
-  height: 40px;
+  align-items: center;
+  background-color: #3aa856;
+  border: 1px solid #34974d;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  border: 1px solid #34974d;
-  background-color: #3aa856;
+  height: 40px;
+  position: relative;
+  width: 200px;
 }
 
-.button,
-.button__icon,
-.button__text {
+.button, .button__icon, .button__text {
   transition: all 0.3s;
 }
 
 .button .button__text {
-  transform: translateX(30px);
-  color: #fff;
+  color: white;
   font-weight: 600;
+  transform: translateX(30px);
 }
 
 .button .button__icon {
-  position: absolute;
-  transform: translateX(155px);
-  height: 100%;
-  width: 39px;
+  align-items: center;
   background-color: #34974d;
   display: flex;
-  align-items: center;
+  height: 100%;
   justify-content: center;
+  position: absolute;
+  transform: translateX(155px);
+  width: 39px;
 }
 
 .button .svg {
+  stroke: white;
   width: 30px;
-  stroke: #fff;
 }
 
 .button:hover {
@@ -75,8 +73,8 @@
 }
 
 .button:hover .button__icon {
-  width: 148px;
   transform: translateX(0);
+  width: 148px;
 }
 
 .button:active .button__icon {

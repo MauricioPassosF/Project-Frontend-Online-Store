@@ -1,7 +1,7 @@
 .div-content-header {
+  align-items: center;
   background-color: grey;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 }
